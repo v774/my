@@ -1,0 +1,161 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-neon: var(--neon);
+  --color-glow-blue: var(--glow-blue);
+  --color-glow-purple: var(--glow-purple);
+
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.04 0 0);
+  --foreground: oklch(1 0 0);
+  --card: oklch(0.08 0.01 270);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.08 0.01 270);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(1 0 0);
+  --primary-foreground: oklch(0.04 0 0);
+  --secondary: oklch(0.18 0.02 270);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.14 0.02 270);
+  --muted-foreground: oklch(0.72 0.03 250);
+  --accent: oklch(0.65 0.22 285);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.24 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.7 0.2 280);
+  --neon: oklch(0.78 0.18 260);
+  --glow-blue: oklch(0.55 0.22 260);
+  --glow-purple: oklch(0.55 0.25 305);
+
+  --gradient-accent: linear-gradient(120deg, oklch(0.6 0.24 270), oklch(0.65 0.26 310), oklch(0.7 0.2 220));
+  --shadow-glow: 0 0 80px -10px oklch(0.6 0.25 280 / 0.45);
+  --shadow-glow-soft: 0 0 120px -20px oklch(0.55 0.22 260 / 0.35);
+}
+
+.dark {
+  --background: oklch(0.04 0 0);
+  --foreground: oklch(1 0 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background: oklch(0.6 0.25 285 / 0.5);
+    color: white;
+  }
+}
+
+/* Канонічні Tailwind v4 утиліти */
+@utility glass-panel {
+  background: linear-gradient(140deg, oklch(1 0 0 / 0.04), oklch(1 0 0 / 0.01));
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid oklch(1 0 0 / 0.08);
+}
+
+@utility text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@utility animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Оголошення ключових кадрів анімацій */
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 60px -10px oklch(0.55 0.22 260 / 0.4), 0 0 120px -30px oklch(0.55 0.25 305 / 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 100px -10px oklch(0.6 0.25 280 / 0.6), 0 0 180px -30px oklch(0.6 0.25 305 / 0.45);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
